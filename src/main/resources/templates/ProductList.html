@@ -26,8 +26,13 @@
             <td th:text="${product.productId}"></td>
             <td th:text="${product.productQuantity}"></td>
             <td>
+<<<<<<< HEAD
                 <form method="get" th:action="@{/product/edit/{productId}(productId = ${product.productId})}">
                     <button class="btn btn-info btn-sm">Edit</button>
+=======
+                <form method="post" th:action="@{/product/delete/{productId}(productId=${product.productId})}">
+                    <button class="btn btn-danger btn-sm">Delete</button>
+>>>>>>> 71701908795d7294b6195230594634711f4385ba
                 </form>
             </td>
         </tr>
