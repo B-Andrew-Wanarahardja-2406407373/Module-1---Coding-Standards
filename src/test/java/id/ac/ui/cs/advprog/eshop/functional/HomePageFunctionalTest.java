@@ -27,14 +27,12 @@ class HomePageFunctionalTest {
 
     @BeforeEach
     void setupTest() {
-        baseUrl = String.format("%s:%d", testBaseUrl, serverPort);
+        baseUrl = String.format("%s:%d/product/", testBaseUrl, serverPort);
     }
 
     @Test
     void pageTitle_isCorrect(ChromeDriver driver) throws Exception {
         driver.get(baseUrl);
-        System.out.println(driver.getPageSource());
-
         String pageTitle = driver.getTitle();
         assertEquals("ADV Shop", pageTitle);
     }
