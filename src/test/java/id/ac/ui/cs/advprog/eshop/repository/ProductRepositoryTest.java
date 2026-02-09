@@ -125,7 +125,50 @@ public class ProductRepositoryTest {
 
         Product returnedProduct = productRepository.edit(editedProduct);
         assertEquals(product, returnedProduct);
-        assertEquals(editedProduct.getProductName(), returnedProduct.getProductName());
-        assertEquals(editedProduct.getProductQuantity(), returnedProduct.getProductQuantity());
+        assertEquals("Shazam", returnedProduct.getProductName());
+        assertEquals(10, returnedProduct.getProductQuantity());
+    }
+
+    @Test
+    void testDelete_productFound() {
+        Product product = new Product();
+        product.setProductName("Shampoo");
+        product.setProductQuantity(100);
+        productRepository.create(product);
+
+        String productId = product.getProductId();
+        boolean productDeleted = productRepository.delete(productId);
+        assertTrue(productDeleted);
+    }
+
+    @Test
+    void testDelete_productNotFound() {
+        Product product = new Product();
+        product.setProductName("Shampoo");
+        product.setProductQuantity(100);
+        productRepository.create(product);
+
+        String unexistingProductId = "0000";
+        boolean productDeleted = productRepository.delete(unexistingProductId);
+        assertFalse(productDeleted);
+    }
+
+    @Test
+    void testGetSize() {
+        assertEquals(0, productRepository.size());
+
+        Product product1 = new Product();
+        product1.setProductName("Shampoo");
+        product1.setProductQuantity(100);
+        productRepository.create(product1);
+
+        assertEquals(1, productRepository.size());
+
+        Product product2 = new Product();
+        product2.setProductName("Kecap");
+        product2.setProductQuantity(50);
+        productRepository.create(product2);
+
+        assertEquals(2, productRepository.size());
     }
 }
