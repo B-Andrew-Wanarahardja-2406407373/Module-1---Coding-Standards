@@ -25,7 +25,11 @@ public class ProductRepository {
         return productData.iterator();
     }
 
-    public void delete(String productId) {
-        productData.removeIf(product -> product.getProductId().equals(productId));
+    public boolean delete(String productId) {
+        return productData.removeIf(product -> product.getProductId().equals(productId));
+    }
+
+    public int size() {
+        return productData.size();
     }
 }
