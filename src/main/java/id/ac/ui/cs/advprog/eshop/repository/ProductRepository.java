@@ -27,17 +27,20 @@ public class ProductRepository {
 
     public Product findById(String productId) {
         for (int repoIndex=0 ; repoIndex<productData.size() ; repoIndex++) {
+            System.out.println(repoIndex + productData.get(repoIndex).getProductId());
             if (productData.get(repoIndex).getProductId().equals(productId)) {
                 return productData.get(repoIndex);
             }
         }
         return null;
     }
-    public void edit(Product updatedProduct) {
+
+    public Product edit(Product updatedProduct) {
         Product product = findById(updatedProduct.getProductId());
         if (product != null) {
             product.setProductName(updatedProduct.getProductName());
             product.setProductQuantity(updatedProduct.getProductQuantity());
         }
+        return product;
     }
 }

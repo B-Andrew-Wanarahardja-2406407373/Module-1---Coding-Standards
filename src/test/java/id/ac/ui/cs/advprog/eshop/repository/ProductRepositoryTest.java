@@ -20,7 +20,9 @@ public class ProductRepositoryTest {
 
     @BeforeEach
     void setup() {
-
+        // I have an auto id generator built into ProductRepository
+        // starts from 0001, 0002, 0003, ...
+        // so I deleted everything about the id
     }
 
     @Test
@@ -49,13 +51,11 @@ public class ProductRepositoryTest {
     @Test
     void testFindAllIfMoreThanOneProduct() {
         Product product1 = new Product();
-        product1.setProductId("000000000000-0000-0000-0000-00000000");
         product1.setProductName("Shampoo");
         product1.setProductQuantity(100);
         productRepository.create(product1);
 
         Product product2 = new Product();
-        product2.setProductId("000000000000-0000-0000-0000-00000001");
         product2.setProductName("Kecap");
         product2.setProductQuantity(50);
         productRepository.create(product2);
@@ -70,5 +70,62 @@ public class ProductRepositoryTest {
         assertEquals(product2.getProductId(), savedProduct.getProductId());
 
         assertFalse(productIterator.hasNext());
+    }
+
+    @Test
+    void testFindByIdSuccess() {
+        Product product = new Product();
+        product.setProductName("Shampoo");
+        product.setProductQuantity(100);
+        productRepository.create(product);
+
+        String product1Id = "0001";
+        Product foundProductById = productRepository.findById(product1Id);
+        assertEquals(product, foundProductById);
+    }
+
+    @Test
+    void testFindByIdFail() {
+        Product product = new Product();
+        product.setProductName("Shampoo");
+        product.setProductQuantity(100);
+        productRepository.create(product);
+
+        String unexistingProductId = "0002";
+        Product foundProductById = productRepository.findById(unexistingProductId);
+        assertEquals(null, foundProductById);
+    }
+
+    @Test
+    void testEdit_productNotFound() {
+        Product product = new Product();
+        product.setProductName("Shampoo");
+        product.setProductQuantity(100);
+        productRepository.create(product);
+
+        Product unexistingProduct = new Product();
+        unexistingProduct.setProductName("Kecap");
+        unexistingProduct.setProductQuantity(50);
+
+        Product editedProduct = productRepository.edit(unexistingProduct);
+        assertEquals(null, editedProduct);
+    }
+
+    @Test
+    void testEdit_productFound() {
+        Product product = new Product();
+        product.setProductName("Shampoo");
+        product.setProductQuantity(100);
+        productRepository.create(product);
+
+        Product editedProduct = new Product();
+        editedProduct.setProductId(product.getProductId());
+        editedProduct.setProductName("Shazam");
+        editedProduct.setProductQuantity(10);
+
+        Product returnedProduct = productRepository.edit(editedProduct);
+        assertEquals(product, returnedProduct);
+        assertEquals(editedProduct.getProductName(), returnedProduct.getProductName());
+        assertEquals(editedProduct.getProductQuantity(), returnedProduct.getProductQuantity());
     }
 }
