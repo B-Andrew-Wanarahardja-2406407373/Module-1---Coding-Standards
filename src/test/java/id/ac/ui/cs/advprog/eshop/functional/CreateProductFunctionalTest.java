@@ -32,8 +32,18 @@ public class CreateProductFunctionalTest {
     }
 
     @Test
-    void pageTitle_isCorrect(ChromeDriver driver) throws Exception {
+    void testNewLine(ChromeDriver driver) throws Exception {
         driver.get(baseUrl);
+
+        boolean lineDoesNotExistAtFirst;
+        try {
+            String tdContents = driver.findElement(By.tagName("td")).getText();
+            lineDoesNotExistAtFirst = false;
+        } catch (NoSuchElementException e) {
+            lineDoesNotExistAtFirst = true;
+        }
+
+        assertTrue(lineDoesNotExistAtFirst);
 
         WebElement addProductButton = driver.findElement(By.id("addProductBtn"));
         addProductButton.click();
@@ -50,7 +60,6 @@ public class CreateProductFunctionalTest {
         submitButton.click();
 
         boolean newLineFound;
-
         try {
             String tdContents = driver.findElement(By.tagName("td")).getText();
             newLineFound = true;
