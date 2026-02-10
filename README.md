@@ -16,6 +16,9 @@ Reflection 2
    but in actuality it goes from 0,1,2,3,4,.... Or you could accidentally provided the wrong number as the expected value as a result of human error,
    but a wrong program that happens to fit into that still shows true. In both cases, the program could still be wrong while having the code covered.
 
-2. 
+2. Well, I think it depends on if the instance variables inside the test itself have the same name. If it's only the variables in the setup, I think it's fine
+   because i would want them to have the same starting point. But if it includes names of the variables in the test, then it would be a problem because
+   they would be testing different things. Having the same name would be misleading. The names of those variables should be changed to better fit the
+   actual thing they test.
    
    
