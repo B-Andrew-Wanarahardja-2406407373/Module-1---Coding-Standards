@@ -14,14 +14,27 @@
     <table border="1" class="table table-striped table-responsive-md">
         <thead>
         <tr>
-            <th scope="col">Product Name</th>
-            <th scope="col">Quantity</th>
+            <th style="width: 3%" scope="col">Product Name</th>
+            <th style="width: 1%" scope="col">Product Id</th>
+            <th style="width: 2%" scope="col">Quantity</th>
+            <th style="width: 1%" scope="col">-</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="product: ${products}">
             <td th:text="${product.productName}"></td>
+            <td th:text="${product.productId}"></td>
             <td th:text="${product.productQuantity}"></td>
+            <td>
+<<<<<<< HEAD
+                <form method="get" th:action="@{/product/edit/{productId}(productId = ${product.productId})}">
+                    <button class="btn btn-info btn-sm">Edit</button>
+=======
+                <form method="post" th:action="@{/product/delete/{productId}(productId=${product.productId})}">
+                    <button class="btn btn-danger btn-sm">Delete</button>
+>>>>>>> 71701908795d7294b6195230594634711f4385ba
+                </form>
+            </td>
         </tr>
         </tbody>
     </table>
