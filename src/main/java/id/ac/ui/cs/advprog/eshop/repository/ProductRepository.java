@@ -27,7 +27,6 @@ public class ProductRepository {
 
     public Product findById(String productId) {
         for (int repoIndex=0 ; repoIndex<productData.size() ; repoIndex++) {
-            System.out.println(repoIndex + productData.get(repoIndex).getProductId());
             if (productData.get(repoIndex).getProductId().equals(productId)) {
                 return productData.get(repoIndex);
             }
