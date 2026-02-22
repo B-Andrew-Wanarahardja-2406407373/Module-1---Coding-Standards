@@ -1,6 +1,6 @@
 package id.ac.ui.cs.advprog.eshop.controller;
 
-import id.ac.ui.cs.advprog.eshop.service.ProductServiceImpl;
+import id.ac.ui.cs.advprog.eshop.service.ProductService;
 import id.ac.ui.cs.advprog.eshop.model.Product;
 
 import org.junit.jupiter.api.Test;
@@ -21,22 +21,22 @@ public class ControllerTest {
     private MockMvc mockMvc;
 
     @MockitoBean
-    private ProductServiceImpl productService;
+    private ProductService productService;
 
     @Test
     void testCreateProductPage() throws Exception {
             mockMvc.perform(get("/product/create"))
                     .andExpect(status().isOk())
-                    .andExpect(view().name("createProduct"))
+                    .andExpect(view().name("CreateProduct"))
                     .andExpect(model().attributeExists("product"));
     }
 
     @Test
     void testCreateProductPost() throws Exception {
         mockMvc.perform(post("/product/create")
-                        .param("id", "p1")
-                        .param("name", "Keyboard")
-                        .param("quantity", "10"))
+                        .param("productId", "0001")
+                        .param("productName", "Book")
+                        .param("productQuantity", "10"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("list"));
 
@@ -52,7 +52,7 @@ public class ControllerTest {
 
         mockMvc.perform(get("/product/list"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("productList"))
+                .andExpect(view().name("ProductList"))
                 .andExpect(model().attributeExists("products"));
 
         verify(productService).findAll();
@@ -67,7 +67,7 @@ public class ControllerTest {
 
         mockMvc.perform(get("/product/edit/0001"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("editProduct"))
+                .andExpect(view().name("EditProduct"))
                 .andExpect(model().attributeExists("product"));
 
         verify(productService).findById("0001");
