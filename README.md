@@ -1,3 +1,5 @@
+Tutorial 1
+
 Reflection 1
 There are multiple ways clean code can be implemented. 
 The Ones i tried to implement were less comments, and variable naming thing. 
@@ -21,4 +23,19 @@ Reflection 2
    they would be testing different things. Having the same name would be misleading. The names of those variables should be changed to better fit the
    actual thing they test.
    
-   
+---------------------------------------------------------------------------
+
+Tutorial 2
+Reflection
+
+1. The thing is, i didn't find any issues during the exercise so i didn't really fix anything 
+   either? I'll send the screenshot of the sonarCLoud on the submission for this lab
+
+2. I think it has. CI/CD is basically automating the process of integration and deployment.
+   there are the ci.yml, scorecard.yml, and sonarCloud.yml files that does the CI part
+   by doing the testing. while the last one is for automatically deploying the application.
+   In those files, they do the testing and deployment on the conditions set in those files.
+   In this case, it is done on push, or on a pull or a certain time for some of them.
+   since the code is being tested and deployed automatically, then I think it fits the
+   definition of CI/CD, which is to do those things automatically. 
+

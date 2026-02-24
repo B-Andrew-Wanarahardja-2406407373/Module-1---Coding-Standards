@@ -3,6 +3,7 @@ plugins {
     jacoco
     id("org.springframework.boot") version "3.5.10"
     id("io.spring.dependency-management") version "1.1.7"
+    id("com.diffplug.spotless") version "8.2.1"
 }
 
 group = "id.ac.ui.cs.advprog"
@@ -77,4 +78,12 @@ tasks.jacocoTestReport{
 
 tasks.withType<Test>().configureEach {
     useJUnitPlatform()
+}
+
+spotless {
+    java {
+        // Apply google-java-format
+        googleJavaFormat()
+
+    }
 }
