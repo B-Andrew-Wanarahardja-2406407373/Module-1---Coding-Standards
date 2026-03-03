@@ -40,6 +40,8 @@ Reflection
    definition of CI/CD, which is to do those things automatically. 
 
 ---------------------------------------------------------------------------
+Tutorial 3
+Reflection 
 
 1. Single Responsibility Principle
    So it turns out I was supposed to make the controller for car in the ProductController at 
@@ -71,7 +73,16 @@ Reflection
    The Liskov Substitution Principle states that A child must be able to substitute its 
    parent without changing the behavior. In here there aren't any classes that extend,
    only implement from an interface. This shouldn't change any behavior as long as there
-   aren't any exception throwing so it should be fine in here. 
+   aren't any exception throwing so it should be fine in here.
+
+   Actually it turns out that there was one. In the code we were supposed to copy,
+   CarController extended ProductController but i didn't realize and didn't copy
+   that part. But that is supposed to be a violation of the Liskov substitution principle.
+   Because it has a different behavior from it's parent. it is already evident by the fact
+   that ProductController is the controller used when the URL has /product while
+   CarController is used when the URL has /car. So product Controller can't replace
+   it's parent without changing the behavior, which violates the Liskov substitution
+   principle.
 
 4. Interface Segregation Principle
    The Interface Segregation Principle (ISP) is a principle that states that a class should
@@ -85,10 +96,15 @@ Reflection
    the Interface Segregation Principle has been fulfilled.
 
 5. Dependency Inversion Principle
-depend on abstraction instead of concrete classes
-Done on CarController.java : CarServiceImpl (concrete) → CarService (interface, abstract)
+   depend on abstraction instead of concrete classes
+   Done on CarController.java : CarServiceImpl (concrete) → CarService (interface, abstract)
 
-Doing this can make testing easier. For example if I already had some data stored in and I 
-wanted to check if the delete function works, then using mocks it would create a dummy that
-won't affect the actual data. Not doing this could risk changing existing data that may or
-may not be useful.
+   Also, making an interface so that CarRepository is an interface and RegularCarRepository being
+   its implementation also counts as applying the Dependency Inversion Principle. So now the
+   Service also depends on an abstraction (CarRepository interface) instead of a concrete class
+   (former CarRepository class)
+   
+   Doing this can make testing easier. For example if I already had some data stored in and I 
+   wanted to check if the delete function works, then using mocks it would create a dummy that
+   won't affect the actual data. Not doing this could risk changing existing data that may or
+   may not be useful.
